@@ -17,7 +17,7 @@
 <p>I am building a directory of love for data.</p>  
 <form name="travel" onsubmit="identify(event)">
      How much do you love data? (1-10)
-    <input name="destination" required="" size="81" type="text"/> 
+    <input name="score" required="" size="81" type="text"/> 
     <br><br><br> 
     Any recommendations for great data collection?
     <br><br> 
@@ -30,7 +30,30 @@
     <br><br>
     <input name="submit" type="submit" value="submit"/>
 </form> 
-    <!--Placeholder for identify and track script -->
+
+    <script type="text/javascript">
+      function identify(e){
+        e.preventDefault();
+        var form = e.target;
+        var email = form["email"].value;
+        var fullname = form["fullname"].value;
+        var score = form["score"].value;
+        var details = form["details"].value;
+        var user = {
+            email: email, 
+            name: fullname, 
+            score: score, 
+            details: details
+        };
+        analytics.identify('1234', {
+            email: email, 
+            name: fullname
+        });
+        analytics.track('score submitted', user, function() {
+            window.location.href = "";
+        });
+      }
+</script>
 </body> 
 </html>
     </font>
