@@ -1,33 +1,18 @@
-<!DOCTYPE html> 
-<html> 
-<head> 
-    <title>Profile API<span id="selection-marker-1" class="redactor-selection-marker"></span></title> 
-
-<iframe src="https://giphy.com/embed/MvZKiDJmB1XEs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/oprah-bath-relaxing-MvZKiDJmB1XEs">via GIPHY</a></p>
-
-</head> 
-<body> 
-    <body style="background-color:#C2DFFF"> </body>
-        <font face="verdana"></font>
-<h1>Profile API lookup</h1> 
-<p>look up your favorite anonymous ID!</p>  
-<form name="userinput" onsubmit="identify(event)">
-     What is the anonymous ID?
-    <input name="anon" required="" size="81" type="text"/> 
-    <br><br><br> 
-</form> 
-
-</font>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<html>
+    <head>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
+    
+
 (function() {
     //'use strict';
     const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
     const PERSONAS_KEY = "Exrhp9aeSZS-lmd6RFPdZWPntKaMg8WQd-srij72LHGnb3q_82C2nH-7GUKuYI1_LewED7Qh8RTmkFQgUhMpWrQGVvI2YsIavCQJzGNT7W7wsoGek934nHREQBUdT16m4z2OKdzd5xwaSwVmXNvWfBIivmJQZiQK4iWv2KXuaSkRYfCmMefRwa_ABNarfqvZC05Kn_UsWxOy"
     const PERSONAS_WORKSPACE = "spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5"
 
-    const anonymous_id="anon"
+    const anonymous_id="3934a1dc-d5f2-4874-82e9-c64648f4b532"
 
     function getTraits(anonymous_id, callback) {
 
@@ -49,17 +34,33 @@
     }
 
     function drawPersonalization(traits) {
-        document.getElementsByClassName("model-container")[0].innerHTML = "<div style='float:left,padding:10px'><img height='100' src="+imgUrl+"?$tray-regular$'/></div><div style='padding:10px'>Click <a href='#'>here</a> to see more items from <strong>Category: " + traits + "</strong>!</div>";
+        if(traits["last_category_viewed"] == 'Furniture') {
+            document.getElementsByClassName("fullImg")[0].src = "https://images.crateandbarrel.com/is/image/Crate/cb_dSC_20190101_WhtsNew_Hero?wid=1405&qlt=80";
+        }
+        if(traits["last_category_viewed"] == 'Tabletop & Bar') {
+            document.getElementsByClassName("fullImg")[0].src = "https://images.crateandbarrel.com/is/image/Crate/cb_dHP_20200326_WineDine_Hero?wid=1680&qlt=50";
+        }
+        if(traits["last_category_viewed"] == 'Easter') {
+            document.getElementsByClassName("fullImg")[0].src = "http://images.crateandbarrel.com/is/image/Crate/cb_dSC_20200116_EasterHero_v3?wid=1405&qlt=75";
+        }
+        if(traits["last_category_viewed"] == 'Dinner Plates') {
+            document.getElementsByClassName("fullImg")[0].src = "https://images.crateandbarrel.com/is/image/Crate/CB_dLP_20200101_ArlHm_Hero?wid=1680&qlt=75";
+        }
+        if(traits["last_category_viewed"] == 'Decor') {
+            document.getElementsByClassName("fullImg")[0].src = "http://images.crateandbarrel.com/is/image/Crate/cb_dSC_20200116_EasterHero_v3?wid=1405&qlt=75";
+        }
   }
 
     getTraits(anonymous_id,drawPersonalization)
 })();
-
-</script>
-
-            
-            
-</body> 
-</html>
-
     
+    <body>
+        <div class="fullImg__feat hero__textHero background__black" style="padding:2em 0em 1.5em 0em">
+		
+            <a href="https://www.crateandbarrel.com/crate-and-barrel-covid-19-response">
+
+	
+	<div class="renew__copy--container" style="position:absolute;top:50%;transform:translateY(-50%);left:0;right:0;text-align:center;">
+</body>
+</script>
+</html>
