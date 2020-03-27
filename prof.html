@@ -1,4 +1,4 @@
-
+<!DOCTYPE html> 
 <html> 
 <head> 
     <title>Profile API<span id="selection-marker-1" class="redactor-selection-marker"></span></title> 
@@ -28,8 +28,8 @@
 
 <script>
 const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
-const PERSONAS_KEY = "Exrhp9aeSZS-lmd6RFPdZWPntKaMg8WQd-srij72LHGnb3q_82C2nH-7GUKuYI1_LewED7Qh8RTmkFQgUhMpWrQGVvI2YsIavCQJzGNT7W7wsoGek934nHREQBUdT16m4z2OKdzd5xwaSwVmXNvWfBIivmJQZiQK4iWv2KXuaSkRYfCmMefRwa_ABNarfqvZC05Kn_UsWxOy"
-const PERSONAS_WORKSPACE = "spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5"
+const PERSONAS_KEY = "xpy_vcaMSv3pw4eanLZzdbKQ-0CJs_Fs6u0m_b6LEYlIPxKqng3uBVa-A0KyORparBO1EBClakEay5E18oChVVJTo0SCVpBUCilWYRdG12jVkZl1N5XvYnvloJ2Jnf_A0s5lfeFrWZ3zkUZAUJNmXWyprtVaHc_ua1hziC1N9vvtm7IHe2-bfeE3n2sIG-92blfLTEkS07rg"
+const PERSONAS_WORKSPACE = "mU1aU9acFn"
 
 const currentAnonymousId = unescape(getCookie('ajs_anonymous_id')).replace(/['"]+/g, '');
 
@@ -44,7 +44,7 @@ function getCookie(name) {
 function getTraits(anonymous_id, callback) {
   if (anonymous_id == "undefined") {anonymous_id=document.getElementById("anon").value}
 
-  const PersonasTraitURL = "/v1/spaces/spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits"
+  const PersonasTraitURL = "/v1/spaces/StMhuCTm6W/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits"
 
   $.ajax({
       url: PROXY_URL+PersonasTraitURL,
@@ -87,6 +87,23 @@ function superFunction(){
       runPersonalization(currentAnonymousId);
     });
 }
+
+<script>
+var modal = document.querySelector(".modal");
+var closeButton = document.querySelector(".close-button");
+
+closeButton.addEventListener("click", toggleModal);
+window.addEventListener("click", windowOnClick);
+
+// EDIT HERE //
+function drawPersonalization(traits) {
+toggleModal()
+  print(traits)
+  }
+}
+
+</script>
+
 
 
 </script>
