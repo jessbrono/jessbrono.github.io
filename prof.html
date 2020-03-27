@@ -91,7 +91,7 @@ window.addEventListener("click", windowOnClick);
 // EDIT HERE //
 function drawPersonalization(traits) {
 toggleModal()
-  print(traits)
+  document.getElementsByClassName("model-container")[0].innerHTML = "<div style='float:left,padding:10px'><img height='100' src="+imgUrl+"?$tray-regular$'/></div><div style='padding:10px'>Click <a href='#'>here</a> to see more items from <strong>Category: " + traits + "</strong>!</div>";
   }
 
 </script>
