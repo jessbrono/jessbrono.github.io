@@ -6,8 +6,9 @@
 <iframe src="https://giphy.com/embed/MvZKiDJmB1XEs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/oprah-bath-relaxing-MvZKiDJmB1XEs">via GIPHY</a></p>
 
 </head> 
-<body> <body style="background-color:#C2DFFF"> </body>
-<font face="arial"></font>
+<body> 
+    <body style="background-color:#C2DFFF"> </body>
+        <font face="verdana"></font>
 <h1>Profile API lookup</h1> 
 <p>look up your favorite anonymous ID!</p>  
 <form name="userinput" onsubmit="identify(event)">
@@ -16,83 +17,48 @@
     <br><br><br> 
 </form> 
 
+</font>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
-const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
-const PERSONAS_KEY = "xpy_vcaMSv3pw4eanLZzdbKQ-0CJs_Fs6u0m_b6LEYlIPxKqng3uBVa-A0KyORparBO1EBClakEay5E18oChVVJTo0SCVpBUCilWYRdG12jVkZl1N5XvYnvloJ2Jnf_A0s5lfeFrWZ3zkUZAUJNmXWyprtVaHc_ua1hziC1N9vvtm7IHe2-bfeE3n2sIG-92blfLTEkS07rg"
-const PERSONAS_WORKSPACE = "mU1aU9acFn"
+(function() {
+    //'use strict';
+    const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
+    const PERSONAS_KEY = "Exrhp9aeSZS-lmd6RFPdZWPntKaMg8WQd-srij72LHGnb3q_82C2nH-7GUKuYI1_LewED7Qh8RTmkFQgUhMpWrQGVvI2YsIavCQJzGNT7W7wsoGek934nHREQBUdT16m4z2OKdzd5xwaSwVmXNvWfBIivmJQZiQK4iWv2KXuaSkRYfCmMefRwa_ABNarfqvZC05Kn_UsWxOy"
+    const PERSONAS_WORKSPACE = "spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5"
 
-const currentAnonymousId = "anon"
+    const anonymous_id="anon"
 
-// UTILITY //
+    function getTraits(anonymous_id, callback) {
 
-function getCookie(name) {
-  var value = "; " + document.cookie;
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) return parts.pop().split(";").shift();
-}
+        const PersonasTraitURL = "/v1/spaces/spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits"
 
-function getTraits(anonymous_id, callback) {
-  if (anonymous_id == "undefined") {anonymous_id=document.getElementById("anon").value}
-
-  const PersonasTraitURL = "/v1/spaces/StMhuCTm6W/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits"
-
-  $.ajax({
-      url: PROXY_URL+PersonasTraitURL,
-      type: 'GET',
-      data: {},
-      headers: {
-          "Authorization": 'Basic ' + btoa(PERSONAS_KEY+":"),   //If your header name has spaces or any other char not appropriate
-      },
-      dataType: 'json',
-      success: function (data) {
-          console.info(data);
-          callback(data["traits"]);
-      }
-  });
-}
-
-function runPersonalization(anonymous_id) {
-  getTraits(anonymous_id,drawPersonalization);
-}
-
-function toggleModal() {
-    modal.classList.toggle("show-modal");
-}
-
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
+        $.ajax({
+            url: PROXY_URL+PersonasTraitURL,
+            type: 'GET',
+            data: {},
+            headers: {
+                "Authorization": 'Basic ' + btoa(PERSONAS_KEY+":")
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.info(data);
+                callback(data["traits"]);
+            }
+        });
     }
-}
 
-function superFunction(){
-    // MAIN //
-    jQuery(document).ready(function () {
-      window.scrollTo(0,0);
-      if(currentAnonymousId) {
-        console.log('AnonymousID: ' + currentAnonymousId);
-      } else {
-        console.log('No anonymous_id set!');
-      }
-      runPersonalization(currentAnonymousId);
-    });
-}
-
-var modal = document.querySelector(".modal");
-var closeButton = document.querySelector(".close-button");
-
-closeButton.addEventListener("click", toggleModal);
-window.addEventListener("click", windowOnClick);
-
-// EDIT HERE //
-function drawPersonalization(traits) {
-toggleModal()
-  document.getElementsByClassName("model-container")[0].innerHTML = "<div style='float:left,padding:10px'><img height='100' src="+imgUrl+"?$tray-regular$'/></div><div style='padding:10px'>Click <a href='#'>here</a> to see more items from <strong>Category: " + traits + "</strong>!</div>";
+    function drawPersonalization(traits) {
+        document.getElementsByClassName("model-container")[0].innerHTML = "<div style='float:left,padding:10px'><img height='100' src="+imgUrl+"?$tray-regular$'/></div><div style='padding:10px'>Click <a href='#'>here</a> to see more items from <strong>Category: " + traits + "</strong>!</div>";
   }
 
-</script>      
+    getTraits(anonymous_id,drawPersonalization)
+})();
+
+</script>
+
+            
+            
 </body> 
 </html>
 
