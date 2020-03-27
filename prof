@@ -1,0 +1,100 @@
+
+<html> 
+<head> 
+    <title>Profile API<span id="selection-marker-1" class="redactor-selection-marker"></span></title> 
+
+<iframe src="https://giphy.com/embed/MvZKiDJmB1XEs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/oprah-bath-relaxing-MvZKiDJmB1XEs">via GIPHY</a></p>
+<script>
+  !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t,e){var n=document.createElement("script");n.type="text/javascript";n.async=!0;n.src="https://cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(n,a);analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.1.0";
+  analytics.load("BfhVy2l5szJp2cfrOLCnsey7nDEGz6Gj");
+  analytics.page();
+  }}();
+</script>
+
+</head> 
+<body> 
+    <body style="background-color:#C2DFFF"> </body>
+        <font face="verdana"></font>
+<h1>Profile API lookup</h1> 
+<p>look up your favorite anonymous ID!</p>  
+<form name="userinput" onsubmit="identify(event)">
+     What is the anonymous ID?
+    <input name="anon" required="" size="81" type="text"/> 
+    <br><br><br> 
+</form> 
+
+</font>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
+const PERSONAS_KEY = "Exrhp9aeSZS-lmd6RFPdZWPntKaMg8WQd-srij72LHGnb3q_82C2nH-7GUKuYI1_LewED7Qh8RTmkFQgUhMpWrQGVvI2YsIavCQJzGNT7W7wsoGek934nHREQBUdT16m4z2OKdzd5xwaSwVmXNvWfBIivmJQZiQK4iWv2KXuaSkRYfCmMefRwa_ABNarfqvZC05Kn_UsWxOy"
+const PERSONAS_WORKSPACE = "spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5"
+
+const currentAnonymousId = unescape(getCookie('ajs_anonymous_id')).replace(/['"]+/g, '');
+
+// UTILITY //
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function getTraits(anonymous_id, callback) {
+  if (anonymous_id == "undefined") {anonymous_id=document.getElementById("anon").value}
+
+  const PersonasTraitURL = "/v1/spaces/spa_1ZfTIhqFilqBN3sYvU4ZN8m2Uf5/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits"
+
+  $.ajax({
+      url: PROXY_URL+PersonasTraitURL,
+      type: 'GET',
+      data: {},
+      headers: {
+          "Authorization": 'Basic ' + btoa(PERSONAS_KEY+":"),   //If your header name has spaces or any other char not appropriate
+      },
+      dataType: 'json',
+      success: function (data) {
+          console.info(data);
+          callback(data["traits"]);
+      }
+  });
+}
+
+function runPersonalization(anonymous_id) {
+  getTraits(anonymous_id,drawPersonalization);
+}
+
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
+
+function superFunction(){
+    // MAIN //
+    jQuery(document).ready(function () {
+      window.scrollTo(0,0);
+      if(currentAnonymousId) {
+        console.log('AnonymousID: ' + currentAnonymousId);
+      } else {
+        console.log('No anonymous_id set!');
+      }
+      runPersonalization(currentAnonymousId);
+    });
+}
+
+
+</script>
+            </script>
+
+            
+            
+</body> 
+</html>
+
+    
