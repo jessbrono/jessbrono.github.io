@@ -60,6 +60,45 @@
       }
 </script>
 
+<script type="text/javascript">
+    (function() {
+    //'use strict';
+    const PROXY_URL = "https://se-personalization-proxy.herokuapp.com"
+    const PERSONAS_KEY = "25LmGXyS0sm7LrAZBwbDbJ4mzCvEDu0j8-_GiCNs-JvaHaEIrhdMYdWw2vcgZGWsm3CSqJ8mfZ4tzXgFoYv7laWuMbU5cbq06a6TRPo40w_EeXvVgW6QGg2zcOgWfp1BvKoIgdK_n-DhjtNKcbSNUiY5w9vRSP5S8it6yb7fk_MEf3hSgdGV_MY9Q66-II2QsZqNu8t8cO2m"
+    const PERSONAS_WORKSPACE = "spa_1bV5ALSLHNS2qg5YcrqyHYffm8q"
+
+    const anonymous_id="6781f029-e6ac-4b57-a7ea-70803610fc15"
+
+    function getTraits(anonymous_id, callback) {
+
+        const PersonasTraitURL = "/v1/spaces/"+PERSONAS_WORKSPACE+"/collections/users/profiles/anonymous_id:"+anonymous_id+"/traits/"
+
+        $.ajax({
+            url: PROXY_URL+PersonasTraitURL,
+            type: 'GET',
+            data: {},
+            headers: {
+                "Authorization": 'Basic ' + btoa(PERSONAS_KEY+":")
+            },
+            dataType: 'json',
+            success: function (data) {
+                console.info(data);
+                callback(data["traits"]);
+            }
+        });
+    }
+
+       function drawPersonalization(traits) {
+        if(traits["demo_18_35"] == "true") {
+            document.getElementsByClassName("ad_300250")[0].src = "https://i.ibb.co/KDZ08S5/finance-1.png";
+  }
+       }
+
+
+    getTraits(anonymous_id,drawPersonalization)
+});
+</script>
+
             
             <iframe src="https://giphy.com/embed/MvZKiDJmB1XEs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/oprah-bath-relaxing-MvZKiDJmB1XEs">via GIPHY</a></p>
 </body> 
