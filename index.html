@@ -50,6 +50,11 @@
             name: fullname, 
             destination: destination, 
             details: details
+        var SMW1 = function(){var s = document.getElementsByTagName("script")[0];
+var b = document.createElement("script");
+b.type = "text/javascript";b.async = true;
+b.src = "https://snap.licdn.com/li.lms-analytics/insight.min.js";
+s.parentNode.insertBefore(b, s);})();   
         };
         analytics.identify('1234', {
             email: email, 
@@ -58,6 +63,7 @@
         analytics.track('destination submitted', user, function() {
             window.location.href = "";
         });
+        analytics.addSourceMiddleware(SMW1);
       }
 </script>            
             <iframe src="https://giphy.com/embed/MvZKiDJmB1XEs" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/oprah-bath-relaxing-MvZKiDJmB1XEs">via GIPHY</a></p>
